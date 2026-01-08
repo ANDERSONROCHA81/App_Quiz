@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">App Quiz</string>
+    <string name="app_name">Quiz App</string>
+    <string name="botao_iniciar">INICIAR QUIZ</string>
+    <string name="texto_digite_nome">Digite seu nome</string>
 </resources>
