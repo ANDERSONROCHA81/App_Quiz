@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Cores Customizadas -->
+
+    <color name="primaria">#203ca3</color>
+    <color name="primaria_variacao">#0f2267</color>
+    <color name="fundo">#bebebe</color>
 </resources>
