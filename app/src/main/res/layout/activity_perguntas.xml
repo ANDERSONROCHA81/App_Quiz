@@ -7,4 +7,78 @@
     android:layout_height="match_parent"
     tools:context=".PerguntasActivity">
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/branco"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Olá, pessoa" />
+
+        <TextView
+            android:id="@+id/text_contador_perguntas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primaria"
+            android:padding="8dp"
+            android:text="1 pergunta de 4"
+            android:textAlignment="center"
+            android:textColor="@color/branco" />
+
+        <TextView
+            android:id="@+id/text_pergunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/fundo"
+            android:padding="8dp"
+            android:text="Pergunta"
+            android:textAlignment="center" />
+
+        <RadioGroup
+            android:id="@+id/radio_group_perguntas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radio_pergunta_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pergunta 01" />
+
+            <RadioButton
+                android:id="@+id/radio_pergunta_02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pergunta 02" />
+
+            <RadioButton
+                android:id="@+id/radio_pergunta_03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pergunta 03" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_confirmar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CONFIRMAR RESPOSTA" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
