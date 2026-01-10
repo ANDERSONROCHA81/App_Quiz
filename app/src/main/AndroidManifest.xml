@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppQuiz">
         <activity
+            android:name=".DetalhesActivity"
+            android:exported="false" />
+        <activity
             android:name=".PerguntasActivity"
             android:exported="false" />
         <activity

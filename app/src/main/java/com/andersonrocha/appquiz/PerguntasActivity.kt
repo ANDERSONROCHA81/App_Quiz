@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,6 +24,11 @@ class PerguntasActivity : AppCompatActivity() {
 
     private lateinit var btnConfirmar: Button
 
+    private lateinit var listaPerguntas: Array<Pergunta>
+
+    private var indicePerguntaAtual = 1
+    private var totalRespostasCorretas = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,9 +41,69 @@ class PerguntasActivity : AppCompatActivity() {
 
         inicializar()
 
+        listaPerguntas = DadosFicticios.recuperarListaPerguntas()
+
         val bundle = intent.extras
         val nome = bundle?.getString("nome_usuario") ?: "Nome não identificado"
+
         textNome.text = "Olá, $nome"
+
+        exibirPerguntaAtual()
+        btnConfirmar.setOnClickListener {
+            if(validarRespostasPerguntaAtual()){
+                indicePerguntaAtual++
+                //Salvar a resposta do usuário
+                if (indicePerguntaAtual <= listaPerguntas.size){
+                    verificarRespostaCerta()
+                    exibirPerguntaAtual()
+                }else{
+
+                }
+            }
+        }
+    }
+
+    private fun verificarRespostaCerta() {
+        val pergunta = listaPerguntas[indicePerguntaAtual - 1]
+        val respostaCerta = pergunta.respostaCerta
+
+        var respostaSelecionada = if (radioPergunta01.isChecked){
+            1
+        }else if (radioPergunta02.isChecked){
+            2
+        }else{
+            3
+        }
+
+        if (respostaSelecionada == respostaCerta){
+            totalRespostasCorretas++
+        }
+    }
+
+    private fun validarRespostasPerguntaAtual() : Boolean {
+        val resposta01 = radioPergunta01.isChecked
+        val resposta02 = radioPergunta02.isChecked
+        val resposta03 = radioPergunta03.isChecked
+
+        if (resposta01 || resposta02 || resposta03){
+            radioGroupPerguntas.clearCheck()
+            return true
+        }
+
+        Toast.makeText(this, "Preencha a resposta para avançar", Toast.LENGTH_SHORT).show()
+        return false
+    }
+
+    private fun exibirPerguntaAtual() {
+        //Exibir dados da pergunta
+        val perguntaAtual = listaPerguntas[indicePerguntaAtual - 1]
+        textPergunta.text = perguntaAtual.titulo
+        radioPergunta01.text = perguntaAtual.resposta01
+        radioPergunta02.text = perguntaAtual.resposta02
+        radioPergunta03.text = perguntaAtual.resposta03
+
+        //Exibir dados do contador
+        textContadorPerguntas.text = "$indicePerguntaAtual pergunta de ${listaPerguntas.size}"
     }
 
     private fun inicializar() {
