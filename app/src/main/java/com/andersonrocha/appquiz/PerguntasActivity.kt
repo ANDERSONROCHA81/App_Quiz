@@ -1,5 +1,6 @@
 package com.andersonrocha.appquiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioButton
@@ -51,13 +52,16 @@ class PerguntasActivity : AppCompatActivity() {
         exibirPerguntaAtual()
         btnConfirmar.setOnClickListener {
             if(validarRespostasPerguntaAtual()){
+                verificarRespostaCerta()
                 indicePerguntaAtual++
                 //Salvar a resposta do usuário
                 if (indicePerguntaAtual <= listaPerguntas.size){
-                    verificarRespostaCerta()
                     exibirPerguntaAtual()
                 }else{
-
+                    val intent = Intent(this, DetalhesActivity::class.java)
+                    intent.putExtra("total_respostas_corretas", totalRespostasCorretas)
+                    startActivity(intent)
+                    finish()
                 }
             }
         }
@@ -71,13 +75,17 @@ class PerguntasActivity : AppCompatActivity() {
             1
         }else if (radioPergunta02.isChecked){
             2
-        }else{
+        }else if (radioPergunta03.isChecked){
             3
+        }else{
+            0
         }
 
         if (respostaSelecionada == respostaCerta){
             totalRespostasCorretas++
         }
+
+        radioGroupPerguntas.clearCheck()
     }
 
     private fun validarRespostasPerguntaAtual() : Boolean {
@@ -86,7 +94,6 @@ class PerguntasActivity : AppCompatActivity() {
         val resposta03 = radioPergunta03.isChecked
 
         if (resposta01 || resposta02 || resposta03){
-            radioGroupPerguntas.clearCheck()
             return true
         }
 
